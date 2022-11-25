@@ -4,7 +4,8 @@ import random
 from st import (
     Ord,
     Tree, Empty,
-    insert, remove, contains
+    insert, remove, contains,
+    rot_left, rot_right
 )
 
 
@@ -43,3 +44,11 @@ def test_balanced() -> None:
         t = remove(t, a)
         assert is_balanced(t)
     assert t is Empty
+
+def test_rotate() -> None:
+    """Test that we have a balanced tree."""
+    x: list[int] = random.sample(range(0, 20), 20)
+    t: Tree[int] = Empty
+    for a in x:
+        t = insert(t, a)
+    assert t == rot_right(rot_left(t))
